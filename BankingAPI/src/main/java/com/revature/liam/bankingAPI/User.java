@@ -1,5 +1,13 @@
 package com.revature.liam.bankingAPI;
 
+
+import java.security.SecureRandom;
+import java.security.spec.KeySpec;
+import java.util.Base64;
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+
 public class User {
 	private int userID;//get
 	private String userName;//get and set
@@ -9,15 +17,42 @@ public class User {
 	private String email;//get and set
 	private Role myRole;//get and change
 	private Account[] accounts = new Account[1];//add, remove by account id, get by account id	| change to array list of strings when database set up and manipulate accounts through driver with account# sore userID on account and accountID on user as froign keys
+	byte[] salt = new byte[16];
 	
-	//constructor for the user class inputs everything needed for user account
-	public User(int userID , String password , String firstName , String lastName , String email , int roleId) {
+	//constructor for the user class to make new user entry inputs everything needed for new user account
+	public User(int userID ,String userName, String password , String firstName , String lastName , String email , int roleId) {
 		this.userID = userID;//generate based off of database in future
-		this.password = password;//create a more secure hashing and salting for this
+		//get random salt first time I create something;
+		SecureRandom random = new SecureRandom();
+		random.nextBytes(salt);
+		this.password = hasher(password,salt);//create a more secure hashing and salting for this
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.userName = userName;
 		myRole = new Role(roleId);
+		//add to database
+	}
+	//constructor for the user class to make new user entry inputs everything needed for new user account
+	public User(String userName , String password) {
+		//check database for user then build user object based off of that data else throw exception
+		//set salt then check password else throw exception
+	}
+	
+	//hash method
+	private String hasher(String password,byte[] salt) {
+		try {
+			KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 256);
+			SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+			byte[] hash = factory.generateSecret(spec).getEncoded();
+			String temp = Base64.getEncoder().encodeToString(hash);
+			return temp;
+		}catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	public String testHasher(String password) {
+		return this.hasher(password, salt);
 	}
 	
 	//get user returns a string [userID, userName, lastName, firstName, role, email, account1#, account2#, ext...] will need string builder
@@ -100,4 +135,24 @@ public class User {
 		return null;
 	}
 	
+	/**
+	public static void main (String... args) {
+		User testUser = new User(1,"LiamNunes","password","LiamNunes","Nunes","Liam",1);
+		System.out.println(testUser.password);
+		System.out.println(testUser.testHasher("password"));
+		if(testUser.password.equals(testUser.testHasher("password"))) {
+			System.out.println("it Works");
+		}
+		User testUser2 = new User(1,"LiamNunes","password","LiamNunes","Nunes","Liam",1);
+		System.out.println(testUser2.password);
+		if(testUser.password.equals(testUser2.password)) {
+			System.out.println("it doesn't Works");
+		}
+		byte[] decode = Base64.getDecoder().decode(testUser.password);
+		for (int i = 0 ; i < decode.length ; ++i) {
+			System.out.print(decode[i]);
+		}
+		
+	}
+	**/
 }

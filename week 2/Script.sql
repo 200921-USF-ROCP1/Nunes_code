@@ -5,30 +5,30 @@ drop table apartments;
 
 
 create table apartments(
-	id numeric primary key,
+	id serial primary key,
 	building_letter varchar (1),
 	room_number numeric (3,0),
 	monthly_rent numeric (5,0)
 );
 create table residents(
-	id numeric primary key,
+	id serial primary key,
 	first_name varchar (60),
 	last_name varchar (60),
-	apartment_id numeric references apartments(id)
+	apartment_id integer references apartments(id)
 );
 create table cars(
-	id numeric primary key,
+	id serial primary key,
 	make varchar (60),
 	model varchar (60),
 	year numeric(4,0),
 	license_plate varchar (8),
-	owner_id numeric references residents(id)
+	owner_id integer references residents(id)
 );
 create table pets(
-	id numeric primary key,
+	id serial primary key,
 	breed varchar (60),
 	name varchar (60),
-	apartment_id numeric references apartments(id),
+	apartment_id integer references apartments(id),
 	is_service_animal numeric (1,0)
 );
 
@@ -39,12 +39,12 @@ INSERT INTO apartments VALUES
   (3, 'C', 1, 1500),
   (4, 'C', 2, 1400);
 
-INSERT INTO residents VALUES
-  (1, 'Jacob', 'Davis', 1),
-  (2, 'Sally', 'Bobson', 2),
-  (3, 'Ricky', 'Bobson', 2),
-  (4, 'Martha', 'Stuart', 3),
-  (5, 'Jackie', 'Samson', 4);
+INSERT INTO residents(first_name,last_name,apartment_id) VALUES
+  ('Jacob', 'Davis', 1),
+  ('Sally', 'Bobson', 2),
+  ('Ricky', 'Bobson', 2),
+  ('Martha', 'Stuart', 3),
+  ('Jackie', 'Samson', 4);
 
 INSERT INTO cars VALUES
   (1, 'Toyota', 'Corolla', 1995, 'IGB18SS', 2),

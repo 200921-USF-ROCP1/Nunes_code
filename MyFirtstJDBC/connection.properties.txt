@@ -1,0 +1,3 @@
+url=jdbc:postgresql://lallah.db.elephantsql.com:5432/jdxdkodz
+username=jdxdkodz
+password= bRjjIa0wtoV4jxmEwFEsn5Rqo_lg_beK
