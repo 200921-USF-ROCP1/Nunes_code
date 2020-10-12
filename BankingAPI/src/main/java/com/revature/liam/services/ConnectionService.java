@@ -1,0 +1,41 @@
+package com.revature.liam.services;
+
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
+
+public class ConnectionService {
+	private static Connection connection;
+	//Class.forName("org.postgresql.Driver");
+	
+	
+	public static Connection getConnection() {
+		if (connection == null) {
+			try {
+				FileInputStream fis = new FileInputStream("connection.properties.txt");
+				Properties prop = new Properties();
+				prop.load(fis);;
+				
+				connection = DriverManager.getConnection(prop.getProperty("url"), 
+						prop.getProperty("username"),prop.getProperty("password"));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return connection;
+	}
+	
+	public static void closeConnection() {
+		try {
+			if (connection != null)
+			connection.close();
+			connection = null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

@@ -1,5 +1,7 @@
 package com.revature.liam.bankingAPI;
 
+import com.revature.models.User;
+
 public class BankingApp{
 	User currentUser;
 	//login current user, check database and call 2 param user

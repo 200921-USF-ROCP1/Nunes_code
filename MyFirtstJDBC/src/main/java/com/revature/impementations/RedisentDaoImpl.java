@@ -25,6 +25,16 @@ public class RedisentDaoImpl implements ResidentDAO{
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate("INSERT INTO residents (first_name, last_name,apartment_id) Values('" 
 			+ resident.getFirstName() + "', '" + resident.getLastName() + "', '" + resident.getApartment().getId() + "');");
+		
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO users (userName, password, salt, firstname, lastname, email, roleid) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?)");
+			ps.setString(1, resident.getFirstName());
+			ps.setString(2, resident.getLastName());
+			ps.setInt(3, resident.getApartment().getId());
+			ps.setInt(4,  resident.getId());
+			
+			
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
