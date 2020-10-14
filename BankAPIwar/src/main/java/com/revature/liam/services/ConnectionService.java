@@ -1,6 +1,5 @@
 package com.revature.liam.services;
 
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -14,9 +13,15 @@ public class ConnectionService {
 	public static Connection getConnection() {
 		if (connection == null) {
 			try {
-				FileInputStream fis = new FileInputStream("connection.properties.txt");
+				Class.forName("org.postgresql.Driver");
+				String url = "jdbc:postgresql://lallah.db.elephantsql.com:5432/eebfrxhs";
+				String username = "eebfrxhs";
+				String password = "MsqfnR0n9TT_5aViY94-y6GwgKmM4v4w";
 				Properties prop = new Properties();
-				prop.load(fis);;
+				
+				prop.put("url", url);
+				prop.put("username", username);
+				prop.put("password", password);
 				
 				connection = DriverManager.getConnection(prop.getProperty("url"), 
 						prop.getProperty("username"),prop.getProperty("password"));

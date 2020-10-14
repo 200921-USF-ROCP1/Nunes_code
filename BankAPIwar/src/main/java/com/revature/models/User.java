@@ -8,6 +8,10 @@ import java.util.Base64;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class User {
 	private int userID;//get
 	private String userName;//get and set
@@ -136,7 +140,32 @@ public class User {
 		}
 	}
 	
-
+	public static String marshalToJson(User user) {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			String jsonString = mapper.writeValueAsString(user);
+			return jsonString;
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static User unmarshalFromJson(String json) {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			User unmarshalled = mapper.readValue(json, User.class);
+			return unmarshalled;
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	/**
 	public static void main (String... args) {

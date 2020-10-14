@@ -10,6 +10,9 @@ public class SecurityService {
 	public User login(String userName , String password) {
 		UserDAO ud = new UserDAO();
 		User user = ud.getUserByUserName(userName);
+		if(user == null) {
+			return null;
+		}
 		byte[] salt = Base64.getDecoder().decode(user.getSalt());
 		String hashed = user.hasher(password, salt);
 		if(user.getPassword().equals(hashed)) {
@@ -22,7 +25,7 @@ public class SecurityService {
 		}
 	}
 	//logout handled through servlet
-	public void register(String userName, String password, String firstName, String lastName, String email, int roleID) {
+	public User register(String userName, String password, String firstName, String lastName, String email, int roleID) {
 		User user = new User();
 		user.setUserName(userName);
 		user.newSalt();
@@ -33,19 +36,24 @@ public class SecurityService {
 		RoleDao rd = new RoleDao();
 		user.setMyRole(rd.getRole(roleID));
 		UserDAO ud = new UserDAO();
-		user.setUserID(ud.createUser(user));
+		User temp = ud.getUserByUserName(userName);
+		if (temp == null) {
+			user.setUserID(ud.createUser(user));
+			return user;
+		}
+		else {return null;}
 	}
 	/**
 	public static void main(String... args) {
 		ConnectionService.closeConnection();
 		SecurityService ss = new SecurityService();
-		ss.register("WhoDis", "Apples", "Alice", "Reynolds", "ar15@jokemail.com", 2);
-		ss.register("DCabs", "Speed", "Dave", "Cabral", "DrDave@gmail.com", 2);
-		ss.register("JohnnyMass", "Lucky", "John", "Erickson", "BigMoney@hotmail.com", 2);
-		ss.register("Gibbers", "Tia", "Corey", "Gibb", "CGibb@gmail.com", 2);
-		ss.register("TiaTots", "Princess01", "Tia", "Millete", "TiaMdog@aol.com", 2);
-		ss.register("TheBeast", "Mothman", "Anna", "Lobe", "Alobes@anon.com", 2);
-		ss.register("JoshB", "PartyTime", "Josh", "Brown", "jb63@jokemail.com", 2);
+		User i =ss.register("WhoDis", "Apples", "Alice", "Reynolds", "ar15@jokemail.com", 2);
+		i = ss.register("DCabs", "Speed", "Dave", "Cabral", "DrDave@gmail.com", 2);
+		i = ss.register("JohnnyMass", "Lucky", "John", "Erickson", "BigMoney@hotmail.com", 2);
+		i = ss.register("Gibbers", "Tia", "Corey", "Gibb", "CGibb@gmail.com", 2);
+		i = ss.register("TiaTots", "Princess01", "Tia", "Millete", "TiaMdog@aol.com", 2);
+		i = ss.register("TheBeast", "Mothman", "Anna", "Lobe", "Alobes@anon.com", 2);
+		i = ss.register("JoshB", "PartyTime", "Josh", "Brown", "jb63@jokemail.com", 2);
 		ConnectionService.closeConnection();
 		
 	}
