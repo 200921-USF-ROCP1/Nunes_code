@@ -33,7 +33,7 @@ public class accountsByOwner extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String path = request.getRequestURI();
+		String path = (String) request.getAttribute("javax.servlet.forward.request_uri");
 		String[] parts = path.split("/");
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("User");

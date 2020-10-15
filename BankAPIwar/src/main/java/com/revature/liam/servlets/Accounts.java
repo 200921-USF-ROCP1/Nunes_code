@@ -51,7 +51,8 @@ public class Accounts extends HttpServlet {
 		if (session != null) {
 			user = (User) session.getAttribute("User");
 			if (user != null) {
-				if(parts.length == 4) {//check if the path has 4 param
+				
+				if(parts.length >= 4) {//check if the path has 4 param
 					if(parts[3].equals("owner")) {//forward to servlet for getting accounts by owner
 						RequestDispatcher dispatcher = getServletContext()
 							      .getRequestDispatcher("/accountsByOwner");
@@ -60,7 +61,7 @@ public class Accounts extends HttpServlet {
 					else if(parts[3].equals("status")) {
 						// forward to servlet for getting by status id
 						RequestDispatcher dispatcher = getServletContext()
-							      .getRequestDispatcher("/accountsByStatus");
+							      .getRequestDispatcher("/AccountsByStatus");
 						dispatcher.forward(request, response);
 					}
 					else {
