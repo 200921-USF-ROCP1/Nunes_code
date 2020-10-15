@@ -39,4 +39,54 @@
     <servlet-name>Register</servlet-name>
     <url-pattern>/Register</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Users</display-name>
+    <servlet-name>Users</servlet-name>
+    <servlet-class>com.revature.liam.servlets.Users</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Users</servlet-name>
+    <url-pattern>/users/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Accounts</display-name>
+    <servlet-name>Accounts</servlet-name>
+    <servlet-class>com.revature.liam.servlets.Accounts</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Accounts</servlet-name>
+    <url-pattern>/accounts/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>accountsByOwner</display-name>
+    <servlet-name>accountsByOwner</servlet-name>
+    <servlet-class>com.revature.liam.servlets.accountsByOwner</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>accountsByOwner</servlet-name>
+    <url-pattern>/accountsByOwner</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AccountsByStatus</display-name>
+    <servlet-name>AccountsByStatus</servlet-name>
+    <servlet-class>com.revature.liam.servlets.AccountsByStatus</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AccountsByStatus</servlet-name>
+    <url-pattern>/AccountsByStatus</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BalanceManager</display-name>
+    <servlet-name>BalanceManager</servlet-name>
+    <servlet-class>com.revature.liam.servlets.BalanceManager</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BalanceManager</servlet-name>
+    <url-pattern>/BalanceManager</url-pattern>
+  </servlet-mapping>
 </web-app>

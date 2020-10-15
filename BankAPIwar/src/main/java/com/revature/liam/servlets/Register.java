@@ -86,9 +86,9 @@ public class Register extends HttpServlet {
 			}
 		}
 		else {
-			response.setStatus(400);
+			response.setStatus(401);
 			Message m = new Message();
-			m.setMessage("Invalid Credentials");
+			m.setMessage("The requested action is not permitted");
 			PrintWriter out = response.getWriter();
 			out.println(Message.marshalToJson(m));
 		}

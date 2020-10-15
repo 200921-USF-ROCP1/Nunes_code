@@ -13,13 +13,13 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class User {
-	private int userID;//get
-	private String userName;//get and set
-	private String password;//get and set for now, change when encrypting
-	private String firstName;//get and set
-	private String lastName;//get and set
-	private String email;//get and set
-	private Role myRole;//get and change
+	private int userID;
+	private String userName;
+	private String password;
+	private String firstName;
+	private String lastName;
+	private String email;
+	private Role myRole;
 	byte[] salt = new byte[16];
 	
 	
@@ -97,7 +97,7 @@ public class User {
 		this.myRole = myRole;
 	}
 
-
+	//3 methods for salt, one to set the users salt from the database, one to get new salt and one to retreive salt
 	public String getSalt() {
 		String bs = Base64.getEncoder().encodeToString(salt);
 		return bs;

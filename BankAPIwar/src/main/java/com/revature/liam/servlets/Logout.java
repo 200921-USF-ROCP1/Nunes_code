@@ -45,6 +45,7 @@ public class Logout extends HttpServlet {
 			user = (User) session.getAttribute("User");
 			if (user != null) {
 				Message m = new Message();
+				response.setStatus(200);
 				m.setMessage("You have successfully logged out " + user.getUserName());
 				PrintWriter out = response.getWriter();
 				out.println(Message.marshalToJson(m));

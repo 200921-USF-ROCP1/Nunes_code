@@ -14,7 +14,7 @@ public class UserServices {
 		UserDAO ud = new UserDAO();
 		return ud.getUserByID(id);
 	}
-	public void updateUser(int id, String userName, String password, String firstName, String lastName, String email, int roleID) {
+	public User updateUser(int id, String userName, String password, String firstName, String lastName, String email, int roleID) {
 		User user = new User();
 		user.setUserID(id);
 		user.setUserName(userName);
@@ -27,6 +27,7 @@ public class UserServices {
 		user.setMyRole(rd.getRole(roleID));
 		UserDAO ud = new UserDAO();
 		ud.updateUser(user);
+		return ud.getUserByID(id);
 	}
 	
 	/**

@@ -50,6 +50,7 @@ public class Login extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("User", myUser);
 			PrintWriter out = response.getWriter();
+			response.setStatus(200);
 			out.println(User.marshalToJson(myUser));
 		}
 		else {

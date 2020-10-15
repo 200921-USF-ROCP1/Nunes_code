@@ -48,12 +48,12 @@ public class SecurityService {
 		ConnectionService.closeConnection();
 		SecurityService ss = new SecurityService();
 		User i =ss.register("WhoDis", "Apples", "Alice", "Reynolds", "ar15@jokemail.com", 2);
-		i = ss.register("DCabs", "Speed", "Dave", "Cabral", "DrDave@gmail.com", 2);
-		i = ss.register("JohnnyMass", "Lucky", "John", "Erickson", "BigMoney@hotmail.com", 2);
+		i = ss.register("DCabs", "Speed", "Dave", "Cabral", "DrDave@gmail.com", 3);
+		i = ss.register("JohnnyMass", "Lucky", "John", "Erickson", "BigMoney@hotmail.com", 3);
 		i = ss.register("Gibbers", "Tia", "Corey", "Gibb", "CGibb@gmail.com", 2);
-		i = ss.register("TiaTots", "Princess01", "Tia", "Millete", "TiaMdog@aol.com", 2);
+		i = ss.register("TiaTots", "Princess01", "Tia", "Millete", "TiaMdog@aol.com", 3);
 		i = ss.register("TheBeast", "Mothman", "Anna", "Lobe", "Alobes@anon.com", 2);
-		i = ss.register("JoshB", "PartyTime", "Josh", "Brown", "jb63@jokemail.com", 2);
+		i = ss.register("JoshB", "PartyTime", "Josh", "Brown", "jb63@jokemail.com", 3);
 		ConnectionService.closeConnection();
 		
 	}
